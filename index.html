@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="description" content="Simulado SABE Bahia - Matemática 9º Ano (50 Questões Comentadas) - Escola Municipal José Cardoso de Lima - Prof. Marcos A. de Jesus" />
+  <title>Simulado SABE Bahia - Matemática 9º Ano | E.M. José Cardoso de Lima</title>
+  
+  <!-- Configuração e Inclusão do MathJax para renderização de LaTeX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      startup: {
+        typeset: false // Desabilita o typeset automático na inicialização, faremos manualmente no JS
+      }
+    };
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    /* ==========================================================================
+       VARIÁVEIS DE TEMA E ESCALA TIPOGRAFICA (DATASHOW + MOBILE FIRST)
+       ========================================================================== */
+    :root {
+      --font-scale: 1;
+      --bg-page: #eef3f9;
+      --bg-card: #ffffff;
+      --bg-subtle: #f8fafc;
+      --bg-option: #f8fafc;
+      --bg-option-hover: #eff6ff;
+      --border-color: #cbd5e1;
+      --border-strong: #94a3b8;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #475569;
+
+      /* Paleta Institucional Bahia */
+      --bahia-navy: #0f294a;
+      --bahia-blue: #1d4ed8;
+      --bahia-blue-hover: #1e40af;
+      --bahia-accent: #0284c7;
+      --bahia-badge-bg: #dbeafe;
+      --bahia-badge-text: #1e3a8a;
+
+      /* Estados de Resposta */
+      --correct-bg: #ecfdf5;
+      --correct-border: #059669;
+      --correct-text: #064e3b;
+      --correct-badge: #059669;
+
+      --wrong-bg: #fef2f2;
+      --wrong-border: #dc2626;
+      --wrong-text: #7f1d1d;
+      --wrong-badge: #dc2626;
+
+      --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 4px 10px -6px rgba(15, 23, 42, 0.06);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+    }
+
+    /* Tema Escuro */
+    html.dark {
+      --bg-page: #070d19;
+      --bg-card: #0f192d;
+      --bg-subtle: #16233d;
+      --bg-option: #16233d;
+      --bg-option-hover: #1e3154;
+      --border-color: #293b5e;
+      --border-strong: #475d87;
+      --text-primary: #f8fafc;
+      --text-secondary: #e2e8f0;
+      --text-muted: #94a3b8;
+      --correct-bg: #052e22;
+      --correct-border: #10b981;
+      --correct-text: #d1fae5;
+      --correct-badge: #10b981;
+      --wrong-bg: #3b0d11;
+      --wrong-border: #f87171;
+      --wrong-text: #fee2e2;
+      --wrong-badge: #ef4444;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Cabeçalho */
+    .top-header {
+      background: linear-gradient(135deg, #0b1f3a 0%, #153e75 100%);
+      color: #ffffff;
+      padding: 0.75rem 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+    }
+
+    .brand-block { display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
+    .brand-emblem { width: 44px; height: 44px; border-radius: 12px; background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.28); display: flex; align-items: center; justify-content: center; font-size: 1.45rem; flex-shrink: 0; }
+    .brand-titles { min-width: 0; }
+    .brand-school { font-size: clamp(0.85rem, 1.3vw, 1.05rem); font-weight: 700; color: #ffffff; line-height: 1.25; }
+    .brand-sub { font-size: clamp(0.75rem, 1.1vw, 0.9rem); color: #bfdbfe; font-weight: 500; line-height: 1.25; }
+
+    .toolbar-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 0.45rem; }
+    .tool-btn { background: rgba(255, 255, 255, 0.14); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 10px; padding: 0.5rem 0.75rem; font-size: 0.92rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; min-height: 42px; transition: background 0.15s; }
+    .tool-btn:hover { background: rgba(255, 255, 255, 0.24); }
+    .zoom-indicator { font-size: 0.82rem; font-weight: 700; color: #e0f2fe; padding: 0 0.25rem; min-width: 44px; text-align: center; }
+
+    .progress-track { width: 100%; height: 6px; background: rgba(255, 255, 255, 0.2); position: relative; overflow: hidden; }
+    .progress-fill { height: 100%; width: 2%; background: linear-gradient(90deg, #38bdf8, #34d399); transition: width 0.3s ease; }
+
+    /* Barra de Navegação */
+    .nav-strip { max-width: 1280px; width: 100%; margin: 0.85rem auto 0; padding: 0 1rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.65rem; }
+    .selectors-group { display: flex; flex-wrap: wrap; align-items: center; gap: 0.55rem; flex: 1 1 auto; }
+    .select-control { background-color: var(--bg-card); color: var(--text-primary); border: 2px solid var(--border-color); border-radius: var(--radius-md); padding: 0.55rem 0.85rem; font-size: 0.98rem; font-weight: 700; min-height: 46px; cursor: pointer; box-shadow: var(--shadow-sm); }
+    .score-pill { display: inline-flex; align-items: center; gap: 0.55rem; background-color: var(--bg-card); border: 2px solid var(--border-color); border-radius: var(--radius-md); padding: 0.45rem 0.85rem; font-size: 0.95rem; font-weight: 700; color: var(--text-primary); min-height: 46px; box-shadow: var(--shadow-sm); }
+    .score-badge { background: var(--correct-bg); color: var(--correct-border); border: 1px solid var(--correct-border); padding: 0.15rem 0.55rem; border-radius: 999px; font-weight: 800; }
+    .reset-mini-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); border-radius: 8px; padding: 0.25rem 0.5rem; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+
+    /* Questão */
+    .main-stage { flex: 1 0 auto; max-width: 1280px; width: 100%; margin: 0.85rem auto 1.25rem; padding: 0 1rem; display: flex; flex-direction: column; gap: 1rem; }
+    .question-card { background-color: var(--bg-card); border: 2px solid var(--border-color); border-radius: var(--radius-lg); padding: clamp(1.1rem, 2.5vw, 2.25rem); box-shadow: var(--shadow-md); display: flex; flex-direction: column; gap: 1.25rem; }
+    .question-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; padding-bottom: 0.85rem; border-bottom: 2px solid var(--border-color); }
+    .meta-left { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+    .q-number-badge { background-color: var(--bahia-navy); color: #ffffff; font-weight: 800; font-size: clamp(0.95rem, 1.4vw, 1.2rem); padding: 0.4rem 0.9rem; border-radius: 10px; }
+    .eixo-badge { background-color: var(--bahia-badge-bg); color: var(--bahia-badge-text); font-weight: 700; font-size: clamp(0.85rem, 1.2vw, 1.05rem); padding: 0.38rem 0.8rem; border-radius: 10px; }
+    .descritor-badge { background-color: var(--bg-subtle); color: var(--text-secondary); border: 1.5px solid var(--border-color); font-weight: 700; font-size: clamp(0.85rem, 1.2vw, 1.05rem); padding: 0.35rem 0.8rem; border-radius: 10px; }
+
+    /* Enunciado Reduzido em 40% (Valores de clamp multiplicados por ~0.6) */
+    .question-statement {
+      font-size: calc(clamp(0.81rem, 1.44vw, 1.29rem) * var(--font-scale));
+      line-height: 1.48;
+      font-weight: 600;
+      color: var(--text-primary);
+      word-wrap: break-word;
+    }
+
+    .table-wrapper { width: 100%; overflow-x: auto; margin: 0.85rem 0; border-radius: var(--radius-md); border: 2px solid var(--border-strong); }
+    .data-table { width: 100%; border-collapse: collapse; font-size: calc(clamp(1.15rem, 1.9vw, 1.75rem) * var(--font-scale)); text-align: center; background-color: var(--bg-card); }
+    .data-table th { background-color: var(--bahia-navy); color: #ffffff; font-weight: 800; padding: 0.7rem 1rem; border: 1px solid var(--border-strong); }
+    .data-table td { padding: 0.65rem 1rem; border: 1px solid var(--border-color); font-weight: 600; color: var(--text-primary); }
+
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.85rem; }
+    @media (min-width: 900px) { .options-grid.two-cols { grid-template-columns: 1fr 1fr; } }
+    .option-btn { width: 100%; text-align: left; background-color: var(--bg-option); color: var(--text-primary); border: 2.5px solid var(--border-color); border-radius: var(--radius-md); padding: clamp(0.85rem, 1.6vw, 1.25rem) clamp(1rem, 2vw, 1.5rem); font-size: calc(clamp(1.2rem, 2vw, 1.85rem) * var(--font-scale)); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.9rem; min-height: 64px; }
+    .option-btn:hover { background-color: var(--bg-option-hover); border-color: var(--bahia-blue); box-shadow: var(--shadow-sm); }
+    .option-letter { width: calc(clamp(2.3rem, 3.2vw, 3.1rem) * var(--font-scale)); height: calc(clamp(2.3rem, 3.2vw, 3.1rem) * var(--font-scale)); border-radius: 50%; background-color: var(--bahia-navy); color: #ffffff; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: calc(clamp(1.1rem, 1.8vw, 1.6rem) * var(--font-scale)); }
+    .option-text { flex: 1 1 auto; }
+    .option-btn.is-correct { background-color: var(--correct-bg); border-color: var(--correct-border); color: var(--correct-text); box-shadow: 0 0 0 2px var(--correct-border); }
+    .option-btn.is-correct .option-letter { background-color: var(--correct-badge); color: #ffffff; }
+    .option-btn.is-wrong { background-color: var(--wrong-bg); border-color: var(--wrong-border); color: var(--wrong-text); }
+    .option-btn.is-wrong .option-letter { background-color: var(--wrong-badge); color: #ffffff; }
+
+    .answer-box { display: none; background-color: var(--correct-bg); border: 3px solid var(--correct-border); border-radius: var(--radius-md); padding: clamp(1rem, 2vw, 1.65rem); color: var(--correct-text); animation: fadeSlideIn 0.22s ease-out; }
+    .answer-box.visible { display: block; }
+    @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .answer-header { display: flex; flex-wrap: wrap; align-items: center; gap: 0.65rem; font-size: calc(clamp(1.35rem, 2.3vw, 2.05rem) * var(--font-scale)); font-weight: 900; margin-bottom: 0.65rem; }
+    .answer-pill { background-color: var(--correct-badge); color: #ffffff; padding: 0.25rem 0.85rem; border-radius: 10px; }
+    .answer-resolution { font-size: calc(clamp(1.1rem, 2.0vw, 1.7rem) * var(--font-scale)); line-height: 1.6; font-weight: 500; }
+    .resolution-label { font-weight: 800; text-decoration: underline; text-underline-offset: 4px; display: block; margin-bottom: 0.5rem; }
+
+    .action-bar { display: grid; grid-template-columns: 1fr 1.35fr 1.35fr; gap: 0.75rem; position: sticky; bottom: 0.5rem; z-index: 30; background-color: var(--bg-page); padding: 0.45rem 0; }
+    @media (max-width: 640px) { .action-bar { grid-template-columns: 1fr 1fr; } .btn-reveal { grid-column: 1 / -1; order: -1; } }
+    .nav-btn { border: none; border-radius: var(--radius-md); padding: 0.95rem 1.15rem; font-size: clamp(1.05rem, 1.7vw, 1.45rem); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 60px; box-shadow: var(--shadow-md); transition: transform 0.1s ease; }
+    .nav-btn:active:not(:disabled) { transform: scale(0.98); }
+    .nav-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-prev { background-color: var(--bg-card); color: var(--text-primary); border: 2.5px solid var(--border-strong); }
+    .btn-reveal { background-color: #059669; color: #ffffff; }
+    .btn-reveal.is-open { background-color: #475569; }
+    .btn-next { background: linear-gradient(135deg, #1d4ed8 0%, #0f294a 100%); color: #ffffff; }
+
+    .app-footer { max-width: 1280px; width: 100%; margin: 0 auto 1.25rem; padding: 0.85rem 1rem 0; border-top: 1px solid var(--border-color); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; font-size: 0.88rem; color: var(--text-muted); }
+    .github-btn { background-color: var(--bg-card); color: var(--text-primary); border: 1.5px solid var(--border-strong); border-radius: 10px; padding: 0.55rem 0.95rem; font-size: 0.9rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.45rem; min-height: 44px; }
+    
+    .toast-banner { position: fixed; bottom: 5.25rem; left: 50%; transform: translateX(-50%) translateY(20px); background-color: #0f294a; color: #ffffff; border: 2px solid #38bdf8; padding: 0.8rem 1.25rem; border-radius: 12px; font-size: 0.98rem; font-weight: 700; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35); z-index: 60; opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; max-width: 92vw; text-align: center; }
+    .toast-banner.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- CABEÇALHO -->
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="brand-block">
+        <div class="brand-emblem" aria-hidden="true">📐</div>
+        <div class="brand-titles">
+          <div class="brand-school">Escola Municipal José Cardoso de Lima • Matemática (9º Ano)</div>
+          <div class="brand-sub">Simulado SABE Bahia • Prof. Marcos A. de Jesus</div>
+        </div>
+      </div>
+      <div class="toolbar-controls">
+        <button type="button" class="tool-btn" id="btn-font-down">A-</button>
+        <span class="zoom-indicator" id="zoom-label">100%</span>
+        <button type="button" class="tool-btn" id="btn-font-up">A+</button>
+        <button type="button" class="tool-btn" id="btn-theme">🌙 Escuro</button>
+        <button type="button" class="tool-btn" id="btn-fullscreen">⛶ Tela Cheia</button>
+      </div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  </header>
+
+  <!-- NAVEGAÇÃO RÁPIDA -->
+  <section class="nav-strip">
+    <div class="selectors-group">
+      <select id="eixo-filter" class="select-control">
+        <option value="TODOS">Todos os Eixos (50 Questões)</option>
+        <option value="EIXO I">Eixo I: Espaço e Forma (01 a 10)</option>
+        <option value="EIXO II">Eixo II: Grandezas e Medidas (11 a 20)</option>
+        <option value="EIXO III">Eixo III: Números e Álgebra (21 a 40)</option>
+        <option value="EIXO IV">Eixo IV: Tratamento da Informação (41 a 50)</option>
+      </select>
+      <select id="question-select" class="select-control"></select>
+    </div>
+    <div class="score-pill">
+      <span>Acertos:</span>
+      <span class="score-badge" id="score-display">0 / 0</span>
+      <button type="button" class="reset-mini-btn" id="btn-reset-score">Limpar</button>
+    </div>
+  </section>
+
+  <!-- ÁREA DA QUESTÃO -->
+  <main class="main-stage" id="swipe-area">
+    <article class="question-card">
+      <div class="question-meta">
+        <div class="meta-left">
+          <span class="q-number-badge" id="q-badge">QUESTÃO 01 / 50</span>
+          <span class="eixo-badge" id="eixo-badge">EIXO I</span>
+        </div>
+        <span class="descritor-badge" id="descritor-badge">Descritor</span>
+      </div>
+
+      <div class="question-statement" id="question-statement"></div>
+      <div class="options-grid" id="options-container"></div>
+
+      <section class="answer-box" id="answer-box">
+        <div class="answer-header">
+          <span>✅ GABARITO OFICIAL:</span>
+          <span class="answer-pill" id="answer-letter-pill">ALTERNATIVA A</span>
+        </div>
+        <div class="answer-resolution">
+          <span class="resolution-label">Resolução Detalhada Passo a Passo:</span>
+          <div id="answer-resolution-text"></div>
+        </div>
+      </section>
+    </article>
+
+    <nav class="action-bar">
+      <button type="button" class="nav-btn btn-prev" id="btn-prev">⬅ Anterior</button>
+      <button type="button" class="nav-btn btn-reveal" id="btn-reveal">👁️ Mostrar Resposta</button>
+      <button type="button" class="nav-btn btn-next" id="btn-next">Avançar ➔</button>
+    </nav>
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-info">
+      <strong>Escola Municipal José Cardoso de Lima • Luís Eduardo Magalhães - BA</strong>
+      <span>Atalhos: Setas ⬅ ➔ • Espaço ou R • Teclas A, B, C, D • Deslize no celular</span>
+    </div>
+    <button type="button" class="github-btn" id="btn-download-github">⬇️ Baixar HTML para GitHub</button>
+  </footer>
+
+  <div class="toast-banner" id="toast-banner"></div>
+
+  <script>
+    /* ==========================================================================
+       BANCO COMPLETO DE QUESTÕES COM NOTAÇÃO LATEX
+       ========================================================================== */
+    const QUESTOES_SABE = [
+      {
+        numero: 1,
+        eixo: "EIXO I",
+        eixoNome: "EIXO I: ESPAÇO E FORMA (GEOMETRIA)",
+        descritor: "D1 - Plano Cartesiano",
+        enunciado: "No plano cartesiano que mapeia a região da Chapada Diamantina, a cidade de Lençóis está no ponto L(-3, 4) e a cidade de Mucugê no ponto M(2, -1). O ponto P correspondente à metade do caminho retilíneo entre elas possui coordenadas:",
+        alternativas: { A: "(-0,5; 1,5)", B: "(0,5; 2,5)", C: "(-1; 3)", D: "(1; -2)" },
+        correta: "A",
+        resolucao: "O ponto médio $P(x_m, y_m)$ é calculado pelas médias aritméticas das coordenadas dos extremos: <br><br> $x_m = \\frac{x_A + x_B}{2} = \\frac{-3 + 2}{2} = \\frac{-1}{2} = -0,5$ <br><br> $y_m = \\frac{y_A + y_B}{2} = \\frac{4 + (-1)}{2} = \\frac{3}{2} = 1,5$ <br><br> Logo, as coordenadas do ponto $P$ são $(-0,5; 1,5)$."
+      },
+      {
+        numero: 2,
+        eixo: "EIXO I",
+        eixoNome: "EIXO I: ESPAÇO E FORMA (GEOMETRIA)",
+        descritor: "D2 - Triângulos",
+        enunciado: "Um projetista desenhou uma estrutura metálica triangular para a cobertura de uma feira livre em Feira de Santana. Dois dos ângulos internos medem 58° e 64°. O terceiro ângulo dessa estrutura mede:",
+        alternativas: { A: "48°", B: "58°", C: "68°", D: "122°" },
+        correta: "B",
+        resolucao: "Sabemos que a soma dos ângulos internos ($S_i$) de qualquer triângulo é sempre $180^\\circ$. <br><br> Sejam os ângulos $\\alpha = 58^\\circ$ e $\\beta = 64^\\circ$. O terceiro ângulo $\\gamma$ é: <br><br> $\\gamma = 180^\\circ - (\\alpha + \\beta)$ <br> $\\gamma = 180^\\circ - (58^\\circ + 64^\\circ)$ <br> $\\gamma = 180^\\circ - 122^\\circ = 58^\\circ$."
+      },
+      {
+        numero: 3,
+        eixo: "EIXO I",
+        eixoNome: "EIXO I: ESPAÇO E FORMA (GEOMETRIA)",
+        descritor: "D3 - Quadriláteros",
+        enunciado: "Uma praça retangular no município de Juazeiro possui lados paralelos dois a dois e quatro ângulos retos. Ao traçar uma diagonal, dividiu-se a praça em dois triângulos congruentes. Essa praça é um exemplo de:",
+        alternativas: { A: "Trapézio", B: "Paralelogramo", C: "Losango", D: "Pentágono" },
+        correta: "B",
+        resolucao: "Por definição, um paralelogramo é um quadrilátero cujos lados opostos são paralelos. <br><br> Como o retângulo possui lados paralelos dois a dois (além de ângulos retos, garantindo o paralelismo), todo retângulo é classificado como um caso especial de **paralelogramo**."
+      },
+      {
+        numero: 4,
+        eixo: "EIXO I",
+        eixoNome: "EIXO I: ESPAÇO E FORMA (GEOMETRIA)",
+        descritor: "D4 - Ângulos de Polígonos",
+        enunciado: "A soma dos ângulos internos de um quiosque construído na orla de Ilhéus, cujo formato superior é um hexágono regular (6 lados), é igual a:",
+        alternativas: { A: "360°", B: "540°", C: "720°", D: "1080°" },
+        correta: "C",
+        resolucao: "A fórmula da soma dos ângulos internos de um polígono é dada por: <br><br> $S_i = (n - 2) \\cdot 180^\\circ$ <br><br> Substituindo o número de lados $n = 6$: <br> $S_i = (6 - 2) \\cdot 180^\\circ$ <br> $S_i = 4 \\cdot 180^\\circ = 720^\\circ$."
+      },
+      {
+        numero: 5,
+        eixo: "EIXO I",
+        eixoNome: "EIXO I: ESPAÇO E FORMA (GEOMETRIA)",
+        descritor: "D5 - Ampliação/Redução",
+        enunciado: "A planta de um galpão de armazenamento de cacau foi ampliada de modo que todas as suas dimensões lineares dobraram de tamanho. Em relação à planta original, a nova área do galpão ficou:",
+        alternativas: { A: "O dobro", B: "O triplo", C: "O quádruplo", D: "Oito vezes maior" },
+        correta: "C",
+        resolucao: "Quando as dimensões lineares de uma figura são multiplicadas por uma constante $k$ (neste caso, $k = 2$), a sua área é multiplicada por $k^2$. <br><br> Logo, a nova área é $2^2 = 4$ vezes a área original, ou seja, o **quádruplo**."
+      },
+      {
+        numero: 6,
+        eixo: "EIXO I",
+        eixoNome: "EIXO I: ESPAÇO E FORMA (GEOMETRIA)",
+        descritor: "D6 - Retas Paralelas",
+        enunciado: "Duas avenidas paralelas em Salvador são cortadas por uma travessa oblíqua. Se um dos ângulos colaterais internos mede 115°, a medida do outro ângulo colateral interno é:",
+        alternativas: { A: "65°", B: "75°", C: "115°", D: "245°" },
+        correta: "A",
+        resolucao: "Na geometria de retas paralelas cortadas por uma transversal, os ângulos colaterais internos são **suplementares**, isto é, a soma de suas medidas é $180^\\circ$. <br><br> Seja $x$ o ângulo desconhecido: <br> $x + 115^\\circ = 180^\\circ$ <br> $x = 180^\\circ - 115^\\circ = 65^\\circ$."
+      },
+      {
+        numero: 7,
+        eixo: "EIXO I",
+        eixoNome: "EIXO I: ESPAÇO E FORMA (GEOMETRIA)",
+        descritor: "D7 - Teorema de Pitágoras",
+        enunciado: "Para reformar a fachada de um casarão histórico no Pelourinho, uma escada de 10 metros foi apoiada na parede. Sabendo que a base da escada está a 6 metros da parede, a altura alcançada é:",
+        alternativas: { A: "4 m", B: "7 m", C: "8 m", D: "12 m" },
+        correta: "C",
+        resolucao: "Aplicando o Teorema de Pitágoras no triângulo retângulo formado: <br><br> $a^2 = b^2 + c^2$ <br> $10^2 = 6^2 + h^2$ <br> $100 = 36 + h^2$ <br> $h^2 = 100 - 36 = 64$ <br> $h = \\sqrt{64} = 8\\text{ m}$."
+      },
+      {
+        numero: 8,
+        eixo: "EIXO I",
+        eixoNome: "EIXO I: ESPAÇO E FORMA (GEOMETRIA)",
+        descritor: "D8 - Planificação de Sólidos",
+        enunciado: "Um reservatório de água em formato de cilindro reto precisa ser revestido internamente. A planificação da superfície lateral desse cilindro corresponde a qual figura geométrica plana?",
+        alternativas: { A: "Círculo", B: "Retângulo", C: "Triângulo", D: "Trapézio" },
+        correta: "B",
+        resolucao: "Ao realizarmos um corte perpendicular à base e desenrolarmos a superfície lateral de um cilindro circular reto, a planificação geométrica resultante é um **retângulo**, cuja base mede $2\\pi r$ (comprimento da circunferência) e a altura é igual à altura do cilindro."
+      },
+      {
+        numero: 9,
+        eixo: "EIXO I",
+        eixoNome: "EIXO I: ESPAÇO E FORMA (GEOMETRIA)",
+        descritor: "D9 - Vistas Ortogonais",
+        enunciado: "Ao observar frontalmente uma pirâmide reta de base quadrada instalada como monumento numa praça pública, a figura bidimensional visualizada pelo pedestre é um:",
+        alternativas: { A: "Quadrado", B: "Losango", C: "Triângulo", D: "Trapezóide" },
+        correta: "C",
+        resolucao: "A projeção ortogonal (vista frontal) de uma pirâmide reta cuja base repousa horizontalmente é a projeção de uma de suas faces laterais. Como a face lateral da pirâmide é um triângulo, a vista frontal será um **triângulo isósceles**."
+      },
+      {
+        numero: 10,
+        eixo: "EIXO I",
+        eixoNome: "EIXO I: ESPAÇO E FORMA (GEOMETRIA)",
+        descritor: "D10 - Semelhança de Triângulos",
+        enunciado: "Um poste vertical de 6 metros projeta no chão uma sombra de 4 metros. No mesmo instante, uma árvore próxima projeta uma sombra de 10 metros. A altura dessa árvore é:",
+        alternativas: { A: "12 m", B: "15 m", C: "18 m", D: "20 m" },
+        correta: "B",
+        resolucao: "Pela propriedade de semelhança de triângulos, a razão entre a altura dos objetos e suas respectivas sombras, projetadas no mesmo instante, é constante: <br><br> $\\frac{h_{\\text{poste}}}{s_{\\text{poste}}} = \\frac{h_{\\text{árvore}}}{s_{\\text{árvore}}}$ <br><br> $\\frac{6}{4} = \\frac{H}{10}$ <br> $4H = 60 \\implies H = \\frac{60}{4} = 15\\text{ m}$."
+      },
+      {
+        numero: 11,
+        eixo: "EIXO II",
+        eixoNome: "EIXO II: GRANDEZAS E MEDIDAS",
+        descritor: "D11 - Perímetro de Polígonos",
+        enunciado: "Um agricultor familiar de Barreiras deseja cercar um terreno retangular de 45 metros de largura por 80 metros de comprimento com 3 fios de arame. Quantos metros de arame utilizará?",
+        alternativas: { A: "250 m", B: "375 m", C: "750 m", D: "900 m" },
+        correta: "C",
+        resolucao: "O perímetro ($P$) do terreno retangular é a soma de todos os seus lados: <br><br> $P = 2 \\cdot (b + h) = 2 \\cdot (80 + 45) = 2 \\cdot 125 = 250\\text{ m}$ <br><br> Como a cerca terá 3 fios de arame, multiplicamos o perímetro por 3: <br> $3 \\cdot 250 = 750\\text{ m}$."
+      },
+      {
+        numero: 12,
+        eixo: "EIXO II",
+        eixoNome: "EIXO II: GRANDEZAS E MEDIDAS",
+        descritor: "D12 - Área de Triângulos/Quadriláteros",
+        enunciado: "Um terreno trapezoidal possui bases medindo 12 metros e 18 metros, e altura igual a 10 metros. A área total desse terreno é de:",
+        alternativas: { A: "120 m²", B: "150 m²", C: "180 m²", D: "300 m²" },
+        correta: "B",
+        resolucao: "A fórmula para a área de um trapézio é: <br><br> $A = \\frac{(B + b) \\cdot h}{2}$ <br><br> Substituindo os valores ($B=18$, $b=12$, $h=10$): <br> $A = \\frac{(18 + 12) \\cdot 10}{2} = \\frac{30 \\cdot 10}{2} = \\frac{300}{2} = 150\\text{ m}^2$."
+      },
+      {
+        numero: 13,
+        eixo: "EIXO II",
+        eixoNome: "EIXO II: GRANDEZAS E MEDIDAS",
+        descritor: "D13 - Área do Círculo",
+        enunciado: "O canteiro central de um giradouro em Vitória da Conquista possui formato circular com raio igual a 7 metros. Adotando π = 3,14, a área desse canteiro vale aproximadamente:",
+        alternativas: { A: "43,96 m²", B: "153,86 m²", C: "307,72 m²", D: "615,44 m²" },
+        correta: "B",
+        resolucao: "A área de um círculo é dada por $A = \\pi \\cdot r^2$. <br><br> Substituindo $\\pi = 3,14$ e $r = 7$: <br> $A = 3,14 \\cdot (7)^2$ <br> $A = 3,14 \\cdot 49$ <br> $A = 153,86\\text{ m}^2$."
+      },
+      {
+        numero: 14,
+        eixo: "EIXO II",
+        eixoNome: "EIXO II: GRANDEZAS E MEDIDAS",
+        descritor: "D14 - Volume de Bloco Retangular",
+        enunciado: "Uma cisterna comunitária construída no Semiárido baiano tem formato de paralelepípedo retângulo com 4m de comprimento, 3m de largura e 2m de profundidade. Sua capacidade máxima é:",
+        alternativas: { A: "9.000 L", B: "12.000 L", C: "24.000 L", D: "48.000 L" },
+        correta: "C",
+        resolucao: "O volume de um paralelepípedo retângulo é o produto de suas três dimensões: <br><br> $V = 4 \\cdot 3 \\cdot 2 = 24\\text{ m}^3$ <br><br> Sabendo que $1\\text{ m}^3$ equivale a $1.000\\text{ Litros}$, a capacidade é: <br> $24 \\cdot 1.000 = 24.000\\text{ Litros}$."
+      },
+      {
+        numero: 15,
+        eixo: "EIXO II",
+        eixoNome: "EIXO II: GRANDEZAS E MEDIDAS",
+        descritor: "D15 - Conversão de Unidades",
+        enunciado: "Um caminhão transportador partiu de Alagoinhas carregando 4,5 toneladas de laranjas. Essa quantidade equivale, em quilogramas, a:",
+        alternativas: { A: "450 kg", B: "4.500 kg", C: "45.000 kg", D: "450.000 kg" },
+        correta: "B",
+        resolucao: "A relação de conversão é $1\\text{ tonelada} (t) = 1.000\\text{ kg}$. <br><br> Logo, para converter: <br> $4,5 \\cdot 1.000 = 4.500\\text{ kg}$."
+      },
+      {
+        numero: 16,
+        eixo: "EIXO II",
+        eixoNome: "EIXO II: GRANDEZAS E MEDIDAS",
+        descritor: "D16 - Escala Cartográfica",
+        enunciado: "No mapa do estado da Bahia confeccionado na escala 1:2.000.000, a distância em linha reta entre duas cidades é de 5 cm. A distância real entre essas cidades é de:",
+        alternativas: { A: "10 km", B: "100 km", C: "1.000 km", D: "10.000 km" },
+        correta: "B",
+        resolucao: "A escala $1:2.000.000$ significa que $1\\text{ cm}$ no mapa equivale a $2.000.000\\text{ cm}$ na realidade. <br><br> Distância real em cm: $5 \\cdot 2.000.000 = 10.000.000\\text{ cm}$. <br><br> Convertendo cm para km (dividindo por $100.000$): <br> $\\frac{10.000.000}{100.000} = 100\\text{ km}$."
+      },
+      {
+        numero: 17,
+        eixo: "EIXO II",
+        eixoNome: "EIXO II: GRANDEZAS E MEDIDAS",
+        descritor: "D17 - Intervalos de Tempo",
+        enunciado: "Um ônibus intermunicipal saiu de Salvador às 07h45min e chegou a Senhor do Bonfim às 14h20min do mesmo dia. O tempo total de viagem foi de:",
+        alternativas: { A: "6h 25min", B: "6h 35min", C: "7h 05min", D: "7h 35min" },
+        correta: "B",
+        resolucao: "Calculando o intervalo em partes: <br><br> 1) De $07\\text{h}45$ até $08\\text{h}00$ = $15\\text{ min}$ <br> 2) De $08\\text{h}00$ até $14\\text{h}00$ = $6\\text{ horas}$ <br> 3) De $14\\text{h}00$ até $14\\text{h}20$ = $20\\text{ min}$ <br><br> Somando os tempos: $6\\text{ horas} + 15\\text{ min} + 20\\text{ min} = 6\\text{h } 35\\text{min}$."
+      },
+      {
+        numero: 18,
+        eixo: "EIXO II",
+        eixoNome: "EIXO II: GRANDEZAS E MEDIDAS",
+        descritor: "D18 - Relação Capacidade/Massa",
+        enunciado: "Uma garrafa pet possui capacidade de 2.500 mililitros. Para completar um reservatório de 20 litros, são necessárias exatamente quantas garrafas cheias?",
+        alternativas: { A: "6 garrafas", B: "8 garrafas", C: "10 garrafas", D: "12 garrafas" },
+        correta: "B",
+        resolucao: "Convertendo as unidades para que fiquem na mesma base: <br> $2.500\\text{ mL} = 2,5\\text{ Litros}$. <br><br> Dividindo o volume total pelo volume de uma garrafa: <br> $\\frac{20}{2,5} = 8\\text{ garrafas}$."
+      },
+      {
+        numero: 19,
+        eixo: "EIXO II",
+        eixoNome: "EIXO II: GRANDEZAS E MEDIDAS",
+        descritor: "D19 - Perímetro de Compostos",
+        enunciado: "A pista de caminhada de uma praça é formada por um retângulo central de 50m × 20m com dois semicírculos nas extremidades menores. O perímetro aproximado (π=3) é:",
+        alternativas: { A: "130 m", B: "160 m", C: "220 m", D: "260 m" },
+        correta: "B",
+        resolucao: "O perímetro corresponde apenas à linha externa da pista. <br><br> As partes retas da pista têm $50\\text{ m}$ cada, logo: $50 + 50 = 100\\text{ m}$. <br><br> As duas extremidades menores (largura $20\\text{ m}$) formam dois semicírculos que juntos dão um círculo completo de diâmetro $D = 20\\text{ m}$. O comprimento da curva circular é: <br> $C = \\pi \\cdot D = 3 \\cdot 20 = 60\\text{ m}$. <br><br> Perímetro total: $100 + 60 = 160\\text{ m}$."
+      },
+      {
+        numero: 20,
+        eixo: "EIXO II",
+        eixoNome: "EIXO II: GRANDEZAS E MEDIDAS",
+        descritor: "D20 - Estimativa de Áreas",
+        enunciado: "Um mosaico cerâmico quadrado de 3m de lado será revestido com peças quadradas menores de 15cm de lado. A quantidade de peças necessárias é:",
+        alternativas: { A: "200", B: "400", C: "600", D: "900" },
+        correta: "B",
+        resolucao: "Convertendo o lado do mosaico para centímetros: $3\\text{ m} = 300\\text{ cm}$. <br><br> Área do mosaico: $300 \\cdot 300 = 90.000\\text{ cm}^2$. <br> Área de cada peça: $15 \\cdot 15 = 225\\text{ cm}^2$. <br><br> Quantidade de peças: <br> $\\frac{90.000}{225} = 400\\text{ peças}$."
+      },
+      {
+        numero: 21,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D21 - Operações com Inteiros",
+        enunciado: "Em um dia de inverno na Chapada Diamantina, a temperatura de madrugada era de -2 °C e, ao meio-dia, atingiu 19 °C. A variação de temperatura registrada nesse período foi de:",
+        alternativas: { A: "17 °C", B: "21 °C", C: "-21 °C", D: "23 °C" },
+        correta: "B",
+        resolucao: "A variação ou amplitude térmica ($V$) é calculada subtraindo a temperatura inicial da temperatura final: <br><br> $V = T_{final} - T_{inicial}$ <br> $V = 19 - (-2)$ <br> $V = 19 + 2 = 21\\,^\\circ\\text{C}$."
+      },
+      {
+        numero: 22,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D22 - Reta Numérica",
+        enunciado: "Na reta numérica dos números reais, o número racional -7/4 está localizado estritamente entre quais dois números inteiros consecutivos?",
+        alternativas: { A: "-3 e -2", B: "-2 e -1", C: "-1 e 0", D: "1 e 2" },
+        correta: "B",
+        resolucao: "Transformando a fração em número decimal: <br> $-\\frac{7}{4} = -1,75$ <br><br> Na reta numérica, o número $-1,75$ é menor que $-1$ e maior que $-2$. Portanto, está localizado entre **$-2$ e $-1$**."
+      },
+      {
+        numero: 23,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D23 - Fração e Decimal",
+        enunciado: "Em uma pesquisa sobre merenda escolar, 3/8 dos estudantes de uma escola em Camaçari declararam preferir frutas tropicais. A representação decimal dessa fração é:",
+        alternativas: { A: "0,3", B: "0,375", C: "0,38", D: "2,66" },
+        correta: "B",
+        resolucao: "Para encontrar a representação decimal, basta efetuar a divisão do numerador pelo denominador: <br><br> $3 \\div 8 = 0,375$."
+      },
+      {
+        numero: 24,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D24 - Operações Racionais",
+        enunciado: "O resultado correto da expressão numérica racional [ 2,5 × (-0,4) + 3/2 ] é igual a:",
+        alternativas: { A: "-0,5", B: "0,5", C: "1,0", D: "2,5" },
+        correta: "B",
+        resolucao: "Resolvendo a expressão em partes (primeiro a multiplicação, depois a adição): <br><br> 1) $2,5 \\cdot (-0,4) = -1,0$ <br> 2) A fração $\\frac{3}{2} = 1,5$ <br><br> Somando os resultados: <br> $-1,0 + 1,5 = 0,5$."
+      },
+      {
+        numero: 25,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D25 - Fração de Quantidade",
+        enunciado: "Um loteamento produtivo de mandioca possui 2.400 kg de raiz colhida. Se 5/8 dessa colheita foi destinada à produção de farinha, quantos quilos foram utilizados nessa produção?",
+        alternativas: { A: "900 kg", B: "1.200 kg", C: "1.500 kg", D: "1.800 kg" },
+        correta: "C",
+        resolucao: "Multiplicamos o total pela fração indicada: <br><br> $\\frac{5}{8} \\cdot 2.400 = 5 \\cdot \\left(\\frac{2.400}{8}\\right)$ <br> $5 \\cdot 300 = 1.500\\text{ kg}$."
+      },
+      {
+        numero: 26,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D26 - Porcentagem Simples",
+        enunciado: "Uma loja em Feira de Santana ofereceu 15% de desconto à vista em uma bicicleta que custava R$ 800,00. O valor pago pelo comprador à vista foi:",
+        alternativas: { A: "R$ 120,00", B: "R$ 680,00", C: "R$ 720,00", D: "R$ 785,00" },
+        correta: "B",
+        resolucao: "Valor do desconto ($D$): <br> $D = 15\\% \\text{ de } 800$ <br> $D = 0,15 \\cdot 800 = 120\\text{ reais}$ <br><br> Subtraindo do valor total: <br> $V_{pago} = 800 - 120 = 680\\text{ reais}$."
+      },
+      {
+        numero: 27,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D27 - Acréscimos Percentuais",
+        enunciado: "O preço do litro do combustível na região metropolitana subiu de R$ 5,00 para R$ 5,60. O percentual de aumento aplicado foi de:",
+        alternativas: { A: "6%", B: "10%", C: "12%", D: "15%" },
+        correta: "C",
+        resolucao: "Diferença de valor: <br> $5,60 - 5,00 = 0,60\\text{ reais}$ <br><br> Para achar o percentual, dividimos o aumento pelo valor original: <br> $\\frac{0,60}{5,00} = 0,12$ <br><br> Multiplicando por 100, temos **$12\\%$**."
+      },
+      {
+        numero: 28,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D28 - Notação Científica",
+        enunciado: "A população estimada de um grande município baiano é de aproximadamente 2.900.000 habitantes. Esse número expresso em notação científica é:",
+        alternativas: { A: "29 × 10⁵", B: "2,9 × 10⁵", C: "2,9 × 10⁶", D: "0,29 × 10⁷" },
+        correta: "C",
+        resolucao: "A notação científica é escrita na forma $a \\cdot 10^n$, onde $1 \\le a < 10$. <br><br> Deslocando a vírgula para a esquerda até deixar o número como $2,9$, movemos a vírgula 6 posições. Logo, o expoente da base 10 é 6: <br><br> $2.900.000 = 2,9 \\cdot 10^6$."
+      },
+      {
+        numero: 29,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D29 - Raízes Aproximadas",
+        enunciado: "O valor inteiro mais próximo de √75, correspondente ao comprimento do lado de uma praça quadrada de 75 m², é:",
+        alternativas: { A: "7", B: "8", C: "9", D: "10" },
+        correta: "C",
+        resolucao: "Os quadrados perfeitos mais próximos de 75 são $64$ e $81$. <br> Sabemos que $\\sqrt{64} = 8$ e $\\sqrt{81} = 9$. <br><br> O número 75 está a $11$ unidades de $64$ (75 - 64) e a apenas $6$ unidades de $81$ (81 - 75). <br> Assim, $\\sqrt{75}$ está muito mais próximo de 9 (é aproximadamente $8,66$). Logo, o inteiro mais próximo é **9**."
+      },
+      {
+        numero: 30,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D30 - Potenciação e Radiciação",
+        enunciado: "O valor da expressão (2³ + √81 - 5⁰) é igual a:",
+        alternativas: { A: "15", B: "16", C: "17", D: "18" },
+        correta: "B",
+        resolucao: "Calculando cada termo separadamente: <br><br> $2^3 = 2 \\cdot 2 \\cdot 2 = 8$ <br> $\\sqrt{81} = 9$ <br> $5^0 = 1$ (todo número não nulo elevado a zero é 1) <br><br> Substituindo na expressão: <br> $8 + 9 - 1 = 17 - 1 = 16$."
+      },
+      {
+        numero: 31,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D31 - Valor Numérico",
+        enunciado: "Dada a expressão algébrica P = 2x² - 3x + 5, o valor numérico de P quando x = -2 é igual a:",
+        alternativas: { A: "3", B: "7", C: "15", D: "19" },
+        correta: "D",
+        resolucao: "Substituímos o valor de $x = -2$ na expressão $P = 2x^2 - 3x + 5$: <br><br> $P = 2(-2)^2 - 3(-2) + 5$ <br> $P = 2(4) + 6 + 5$ <br> $P = 8 + 6 + 5$ <br> $P = 19$."
+      },
+      {
+        numero: 32,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D32 - Simplificação Algébrica",
+        enunciado: "A forma simplificada da expressão polinomial 4(a + 2b) - 2(a - b) é dada por:",
+        alternativas: { A: "2a + 6b", B: "2a + 10b", C: "6a + 6b", D: "2a + 8b" },
+        correta: "B",
+        resolucao: "Aplicando a propriedade distributiva: <br><br> $4(a + 2b) - 2(a - b)$ <br> $= 4a + 8b - 2a + 2b$ <br><br> Agrupando os termos semelhantes: <br> $= (4a - 2a) + (8b + 2b)$ <br> $= 2a + 10b$."
+      },
+      {
+        numero: 33,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D33 - Equação do 1º Grau",
+        enunciado: "Um motorista de aplicativo cobra R$ 5,00 de taxa fixa mais R$ 2,50 por quilômetro rodado. Se uma corrida custou R$ 42,50, a distância percorrida foi de:",
+        alternativas: { A: "12 km", B: "15 km", C: "17 km", D: "18 km" },
+        correta: "B",
+        resolucao: "Montando a equação do 1º grau, onde $x$ é a distância em km: <br><br> $5 + 2,50x = 42,50$ <br> $2,50x = 42,50 - 5$ <br> $2,50x = 37,50$ <br> $x = \\frac{37,50}{2,50} = 15\\text{ km}$."
+      },
+      {
+        numero: 34,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D34 - Sistema de Equações",
+        enunciado: "Em um estacionamento há carros (4 rodas) e motos (2 rodas), totalizando 30 veículos e 96 rodas. Quantos carros estão estacionados?",
+        alternativas: { A: "12", B: "15", C: "18", D: "21" },
+        correta: "C",
+        resolucao: "Montamos o sistema de equações onde $c$ representa carros e $m$ motos: <br><br> $\\begin{cases} c + m = 30 \\\\ 4c + 2m = 96 \\end{cases}$ <br><br> Isolando $m$ na primeira equação: $m = 30 - c$. <br> Substituindo na segunda: <br> $4c + 2(30 - c) = 96$ <br> $4c + 60 - 2c = 96$ <br> $2c = 36$ <br> $c = \\frac{36}{2} = 18\\text{ carros}$."
+      },
+      {
+        numero: 35,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D35 - Equação do 2º Grau",
+        enunciado: "As raízes reais da equação do 2º grau x² - 7x + 10 = 0 são os números:",
+        alternativas: { A: "2 e 5", B: "-2 e -5", C: "1 e 10", D: "-1 e -10" },
+        correta: "A",
+        resolucao: "Para resolver a equação do 2º grau $x^2 - 7x + 10 = 0$, utilizamos a fórmula resolutiva de Bhaskara. <br><br> <b>Passo 1: Identificar os coeficientes</b> <br> $a = 1$, $b = -7$, $c = 10$ <br><br> <b>Passo 2: Calcular o discriminante ($\\Delta$) separadamente</b> <br> $\\Delta = b^2 - 4ac$ <br> $\\Delta = (-7)^2 - 4 \\cdot 1 \\cdot 10$ <br> $\\Delta = 49 - 40$ <br> $\\Delta = 9$ <br><br> <b>Passo 3: Aplicar na fórmula das raízes</b> <br> $x = \\frac{-b \\pm \\sqrt{\\Delta}}{2a}$ <br> $x = \\frac{-(-7) \\pm \\sqrt{9}}{2 \\cdot 1}$ <br> $x = \\frac{7 \\pm 3}{2}$ <br><br> <b>Passo 4: Determinar $x_1$ e $x_2$</b> <br> $x_1 = \\frac{7 + 3}{2} = \\frac{10}{2} = 5$ <br> $x_2 = \\frac{7 - 3}{2} = \\frac{4}{2} = 2$ <br><br> Portanto, as raízes são $2$ e $5$."
+      },
+      {
+        numero: 36,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D36 - Sequências e Termo Geral",
+        enunciado: "A sequência numérica (4, 9, 14, 19, 24, ...) segue uma lei de formação constante. O 10º termo dessa sequência é:",
+        alternativas: { A: "44", B: "49", C: "54", D: "59" },
+        correta: "B",
+        resolucao: "Observa-se que a sequência aumenta de $5$ em $5$, caracterizando uma Progressão Aritmética (PA) onde a razão $r = 5$ e o primeiro termo $a_1 = 4$. <br><br> Fórmula do termo geral: <br> $a_n = a_1 + (n - 1) \\cdot r$ <br><br> Para o $10^\\circ$ termo ($n=10$): <br> $a_{10} = 4 + (10 - 1) \\cdot 5$ <br> $a_{10} = 4 + 9 \\cdot 5$ <br> $a_{10} = 4 + 45 = 49$."
+      },
+      {
+        numero: 37,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D37 - Regra de Três Direta",
+        enunciado: "Uma fábrica de polpa de frutas no Vale do São Francisco produz 300 caixas de polpa em 4 horas. Mantido o mesmo ritmo, quantas caixas serão produzidas em 7 horas?",
+        alternativas: { A: "420", B: "500", C: "525", D: "600" },
+        correta: "C",
+        resolucao: "Por regra de três simples e direta: <br><br> $\\frac{300\\text{ caixas}}{4\\text{ horas}} = \\frac{x\\text{ caixas}}{7\\text{ horas}}$ <br><br> Multiplicando cruzado: <br> $4x = 300 \\cdot 7$ <br> $4x = 2.100$ <br> $x = \\frac{2.100}{4} = 525\\text{ caixas}$."
+      },
+      {
+        numero: 38,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D38 - Proporção Inversa",
+        enunciado: "Com uma velocidade média de 80 km/h, um ônibus faz o trajeto entre duas cidades em 3 horas. Se a velocidade aumentar para 120 km/h, o tempo gasto será de:",
+        alternativas: { A: "1,5 h", B: "2,0 h", C: "2,5 h", D: "4,5 h" },
+        correta: "B",
+        resolucao: "A velocidade e o tempo são grandezas inversamente proporcionais. Portanto, o produto entre elas permanece constante: <br><br> $v_1 \\cdot t_1 = v_2 \\cdot t_2$ <br> $80 \\cdot 3 = 120 \\cdot t_2$ <br> $240 = 120 \\cdot t_2$ <br> $t_2 = \\frac{240}{120} = 2,0\\text{ horas}$."
+      },
+      {
+        numero: 39,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D39 - Função Afim",
+        enunciado: "O gráfico de uma função afim f(x) = ax + b passa pelos pontos (0, 4) e (2, 10). O coeficiente angular 'a' dessa função é igual a:",
+        alternativas: { A: "2", B: "3", C: "4", D: "5" },
+        correta: "B",
+        resolucao: "O coeficiente angular $a$ é a taxa de variação da função, calculada por: <br><br> $a = \\frac{\\Delta y}{\\Delta x} = \\frac{y_2 - y_1}{x_2 - x_1}$ <br><br> Substituindo os pontos dados $(0, 4)$ e $(2, 10)$: <br> $a = \\frac{10 - 4}{2 - 0} = \\frac{6}{2} = 3$."
+      },
+      {
+        numero: 40,
+        eixo: "EIXO III",
+        eixoNome: "EIXO III: NÚMEROS E OPERAÇÕES / ÁLGEBRA",
+        descritor: "D40 - Função Quadrática",
+        enunciado: "A trajetória parabólica de um projétil é modelada por h(t) = -t² + 6t. A altura máxima atingida por esse projétil ocorre no tempo t igual a:",
+        alternativas: { A: "2 segundos", B: "3 segundos", C: "6 segundos", D: "9 segundos" },
+        correta: "B",
+        resolucao: "A função que modela a trajetória é uma parábola côncava para baixo (pois $a = -1 < 0$). O instante em que ocorre a altura máxima corresponde à coordenada $x$ do vértice da parábola ($t_v$): <br><br> $t_v = \\frac{-b}{2a}$ <br><br> Substituindo $b = 6$ e $a = -1$: <br> $t_v = \\frac{-6}{2(-1)} = \\frac{-6}{-2} = 3\\text{ segundos}$."
+      },
+      {
+        numero: 41,
+        eixo: "EIXO IV",
+        eixoNome: "EIXO IV: TRATAMENTO DA INFORMAÇÃO",
+        descritor: "D41 - Leitura de Tabelas",
+        enunciado: "A tabela apresenta a produção agrícola de grãos (em toneladas) numa fazenda no Oeste da Bahia:",
+        tabelaHtml: `
+          <div class="table-wrapper">
+            <table class="data-table" aria-label="Produção agrícola">
+              <thead>
+                <tr><th>Cultura</th><th>2024</th><th>2025</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Soja</td><td>1.200</td><td>1.500</td></tr>
+                <tr><td>Milho</td><td>800</td><td>950</td></tr>
+                <tr><td>Algodão</td><td>500</td><td>650</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `,
+        perguntaFinal: "O aumento total na produção de grãos de 2024 para 2025 foi de:",
+        alternativas: { A: "400 t", B: "600 t", C: "3.100 t", D: "3.700 t" },
+        correta: "B",
+        resolucao: "Total de grãos em 2024: $1.200 + 800 + 500 = 2.500\\text{ t}$. <br><br> Total de grãos em 2025: $1.500 + 950 + 650 = 3.100\\text{ t}$. <br><br> Aumento total: $3.100 - 2.500 = 600\\text{ t}$."
+      },
+      {
+        numero: 42,
+        eixo: "EIXO IV",
+        eixoNome: "EIXO IV: TRATAMENTO DA INFORMAÇÃO",
+        descritor: "D42 - Gráfico de Colunas",
+        enunciado: "Um gráfico mostra a produção diária de energia eólica em Caetité durante 4 dias: Seg (40 MW), Ter (60 MW), Qua (50 MW), Qui (70 MW). A produção média diária foi:",
+        alternativas: { A: "50 MW", B: "55 MW", C: "60 MW", D: "220 MW" },
+        correta: "B",
+        resolucao: "A média aritmética é a soma dos valores dividida pelo total de observações: <br><br> $M = \\frac{40 + 60 + 50 + 70}{4}$ <br> $M = \\frac{220}{4} = 55\\text{ MW}$."
+      },
+      {
+        numero: 43,
+        eixo: "EIXO IV",
+        eixoNome: "EIXO IV: TRATAMENTO DA INFORMAÇÃO",
+        descritor: "D43 - Gráfico de Setores",
+        enunciado: "Um gráfico de setores representa o consumo de água residencial: Cozinha (30%), Banheiro (50%), Lavanderia (20%). O ângulo central do setor 'Cozinha' é de:",
+        alternativas: { A: "30°", B: "72°", C: "108°", D: "180°" },
+        correta: "C",
+        resolucao: "No gráfico de setores, a circunferência completa equivale a $100\\%$ ou $360^\\circ$. <br><br> Para o setor de 'Cozinha' ($30\\%$): <br> $Ângulo = 30\\% \\text{ de } 360^\\circ$ <br> $Ângulo = 0,30 \\cdot 360^\\circ = 108^\\circ$."
+      },
+      {
+        numero: 44,
+        eixo: "EIXO IV",
+        eixoNome: "EIXO IV: TRATAMENTO DA INFORMAÇÃO",
+        descritor: "D44 - Gráfico de Linhas",
+        enunciado: "A temperatura em Salvador foi registrada ao longo do dia: 6h (22°C), 9h (25°C), 12h (30°C), 15h (31°C), 18h (27°C). O maior aumento de temperatura ocorreu entre:",
+        alternativas: { A: "6h e 9h", B: "9h e 12h", C: "12h e 15h", D: "15h e 18h" },
+        correta: "B",
+        resolucao: "Cálculo das variações de temperatura: <br><br> De $6\\text{h}$ às $9\\text{h}$: $25 - 22 = +3^\\circ\\text{C}$ <br> De $9\\text{h}$ às $12\\text{h}$: $30 - 25 = +5^\\circ\\text{C}$ (Maior aumento) <br> De $12\\text{h}$ às $15\\text{h}$: $31 - 30 = +1^\\circ\\text{C}$ <br> De $15\\text{h}$ às $18\\text{h}$: $27 - 31 = -4^\\circ\\text{C}$ (Queda)."
+      },
+      {
+        numero: 45,
+        eixo: "EIXO IV",
+        eixoNome: "EIXO IV: TRATAMENTO DA INFORMAÇÃO",
+        descritor: "D45 - Média Aritmética",
+        enunciado: "As notas de um estudante nas quatro unidades de Matemática foram: 6,5; 7,0; 8,0 e 8,5. A média anual obtida por esse estudante é:",
+        alternativas: { A: "7,2", B: "7,5", C: "7,8", D: "8,0" },
+        correta: "B",
+        resolucao: "Média Aritmética simples: <br><br> $M = \\frac{6,5 + 7,0 + 8,0 + 8,5}{4}$ <br> $M = \\frac{30,0}{4} = 7,5$."
+      },
+      {
+        numero: 46,
+        eixo: "EIXO IV",
+        eixoNome: "EIXO IV: TRATAMENTO DA INFORMAÇÃO",
+        descritor: "D46 - Moda e Mediana",
+        enunciado: "A lista de idades dos alunos de uma equipe de robótica é: 14, 15, 14, 16, 15, 14, 17. A moda e a mediana desse conjunto são, respectivamente:",
+        alternativas: { A: "14 e 15", B: "15 e 14", C: "14 e 14", D: "15 e 15" },
+        correta: "A",
+        resolucao: "1) Colocando os dados em ordem crescente: $14, 14, 14, 15, 15, 16, 17$. <br><br> 2) **Moda**: é o valor que mais se repete. O número $14$ aparece três vezes, portanto a Moda é **$14$**. <br><br> 3) **Mediana**: é o termo central. Com $7$ valores, o termo central é o $4^\\circ$ elemento, que é **$15$**."
+      },
+      {
+        numero: 47,
+        eixo: "EIXO IV",
+        eixoNome: "EIXO IV: TRATAMENTO DA INFORMAÇÃO",
+        descritor: "D47 - Probabilidade Simples",
+        enunciado: "Uma urna contém 12 bolas vermelhas, 8 bolas azuis e 10 bolas verdes. Retirando-se uma bola ao acaso, a probabilidade de ela ser azul é:",
+        alternativas: { A: "8/30 (26,6%)", B: "4/15 (26,6%)", C: "8/22 (36,3%)", D: "10/30 (33,3%)" },
+        correta: "B",
+        resolucao: "O total de bolas na urna (espaço amostral) é: $12 + 8 + 10 = 30$. <br><br> Bolas azuis (casos favoráveis) = $8$. <br><br> Probabilidade: $P = \\frac{8}{30}$. Simplificando por 2, temos $P = \\frac{4}{15}$, que equivale a cerca de $26,6\\%$."
+      },
+      {
+        numero: 48,
+        eixo: "EIXO IV",
+        eixoNome: "EIXO IV: TRATAMENTO DA INFORMAÇÃO",
+        descritor: "D48 - Probabilidade em Porcentagem",
+        enunciado: "Em uma turma com 40 alunos, 24 são meninas. Ao sortear um líder de turma, a probabilidade percentual de ser sorteado um menino é de:",
+        alternativas: { A: "30%", B: "40%", C: "60%", D: "70%" },
+        correta: "B",
+        resolucao: "Total de meninos: $40 - 24 = 16$. <br><br> A probabilidade de sortear um menino é a razão entre o número de meninos e o total de alunos: <br> $P = \\frac{16}{40} = 0,40$ <br><br> Transformando em porcentagem: $0,40 \\cdot 100 = 40\\%$."
+      },
+      {
+        numero: 49,
+        eixo: "EIXO IV",
+        eixoNome: "EIXO IV: TRATAMENTO DA INFORMAÇÃO",
+        descritor: "D49 - Associação Tabela/Gráfico",
+        enunciado: "Uma pesquisa registrou os meios de transporte de 200 estudantes: Ônibus (100), A pé (60), Bicicleta (40). O gráfico que representa esses dados possui percentuais de:",
+        alternativas: { A: "50%, 30%, 20%", B: "40%, 30%, 30%", C: "60%, 25%, 15%", D: "50%, 25%, 25%" },
+        correta: "A",
+        resolucao: "Convertendo cada quantidade em relação ao total ($200$): <br><br> Ônibus: $\\frac{100}{200} = 0,50 = 50\\%$ <br><br> A pé: $\\frac{60}{200} = 0,30 = 30\\%$ <br><br> Bicicleta: $\\frac{40}{200} = 0,20 = 20\\%$."
+      },
+      {
+        numero: 50,
+        eixo: "EIXO IV",
+        eixoNome: "EIXO IV: TRATAMENTO DA INFORMAÇÃO",
+        descritor: "D50 - Análise Cruzada de Dados",
+        enunciado: "Em um estande de feira tecnológica na Bahia, dos 150 visitantes, 90 eram estudantes e 60 professores. Se 60% dos estudantes e 50% dos professores eram mulheres, o total de mulheres foi:",
+        alternativas: { A: "74", B: "84", C: "90", D: "96" },
+        correta: "B",
+        resolucao: "Mulheres entre os estudantes: $60\\% \\text{ de } 90 = 0,60 \\cdot 90 = 54$. <br><br> Mulheres entre os professores: $50\\% \\text{ de } 60 = 0,50 \\cdot 60 = 30$. <br><br> Total geral de mulheres = $54 + 30 = 84$."
+      }
+    ];
+
+    /* ==========================================================================
+       ESTADO E FUNÇÕES DA APLICAÇÃO
+       ========================================================================== */
+    const state = {
+      eixoAtual: "TODOS",
+      indiceNaLista: 0,
+      fontScale: 1.0,
+      darkMode: false,
+      respostasUsuario: {}, 
+      respostaVisivel: false
+    };
+
+    const elProgressFill = document.getElementById("progress-fill");
+    const elEixoFilter = document.getElementById("eixo-filter");
+    const elQuestionSelect = document.getElementById("question-select");
+    const elScoreDisplay = document.getElementById("score-display");
+    const elQBadge = document.getElementById("q-badge");
+    const elEixoBadge = document.getElementById("eixo-badge");
+    const elDescritorBadge = document.getElementById("descritor-badge");
+    const elStatement = document.getElementById("question-statement");
+    const elOptionsContainer = document.getElementById("options-container");
+    const elAnswerBox = document.getElementById("answer-box");
+    const elAnswerPill = document.getElementById("answer-letter-pill");
+    const elAnswerText = document.getElementById("answer-resolution-text");
+    const elBtnPrev = document.getElementById("btn-prev");
+    const elBtnReveal = document.getElementById("btn-reveal");
+    const elBtnNext = document.getElementById("btn-next");
+    const elZoomLabel = document.getElementById("zoom-label");
+    const elBtnTheme = document.getElementById("btn-theme");
+    const elBtnFullscreen = document.getElementById("btn-fullscreen");
+    const elToast = document.getElementById("toast-banner");
+
+    let toastTimer = null;
+    function showToast(mensagem) {
+      elToast.textContent = mensagem;
+      elToast.classList.add("show");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => elToast.classList.remove("show"), 3400);
+    }
+
+    function getFilteredQuestions() {
+      if (state.eixoAtual === "TODOS") return QUESTOES_SABE;
+      return QUESTOES_SABE.filter(q => q.eixo === state.eixoAtual);
+    }
+
+    function populateQuestionSelect() {
+      const lista = getFilteredQuestions();
+      elQuestionSelect.innerHTML = "";
+      lista.forEach((q, idx) => {
+        const numStr = String(q.numero).padStart(2, "0");
+        const marcada = state.respostasUsuario[q.numero];
+        const statusMark = marcada ? (marcada === q.correta ? " ✓" : " ✗") : "";
+        const opt = document.createElement("option");
+        opt.value = String(idx);
+        opt.textContent = `Questão ${numStr} de 50 — ${q.descritor}${statusMark}`;
+        elQuestionSelect.appendChild(opt);
+      });
+      elQuestionSelect.value = String(state.indiceNaLista);
+    }
+
+    function updateScoreDisplay() {
+      const respondidas = Object.keys(state.respostasUsuario);
+      let acertos = 0;
+      respondidas.forEach(numStr => {
+        const num = Number(numStr);
+        const questao = QUESTOES_SABE.find(item => item.numero === num);
+        if (questao && state.respostasUsuario[num] === questao.correta) acertos++;
+      });
+      elScoreDisplay.textContent = `${acertos} / ${respondidas.length}`;
+    }
+
+    function renderQuestion() {
+      const lista = getFilteredQuestions();
+      if (state.indiceNaLista < 0) state.indiceNaLista = 0;
+      if (state.indiceNaLista >= lista.length) state.indiceNaLista = lista.length - 1;
+
+      const q = lista[state.indiceNaLista];
+      const numStr = String(q.numero).padStart(2, "0");
+      const escolhaUsuario = state.respostasUsuario[q.numero] || null;
+
+      if (escolhaUsuario) state.respostaVisivel = true;
+
+      elQBadge.textContent = `QUESTÃO ${numStr} / 50`;
+      elEixoBadge.textContent = q.eixoNome;
+      elDescritorBadge.textContent = q.descritor;
+
+      const progressoPct = ((state.indiceNaLista + 1) / lista.length) * 100;
+      elProgressFill.style.width = `${progressoPct}%`;
+
+      if (q.tabelaHtml) {
+        elStatement.innerHTML = `<div>${q.enunciado}</div>${q.tabelaHtml}<div>${q.perguntaFinal || ""}</div>`;
+      } else {
+        elStatement.innerHTML = q.enunciado; // Pode conter tags HTML/LaTeX
+      }
+
+      const letras = ["A", "B", "C", "D"];
+      const maxLen = Math.max(...letras.map(l => q.alternativas[l].length));
+      elOptionsContainer.className = maxLen <= 24 ? "options-grid two-cols" : "options-grid";
+      elOptionsContainer.innerHTML = "";
+      
+      letras.forEach(letra => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option-btn";
+        btn.setAttribute("data-letter", letra);
+        let statusIcon = "";
+        
+        if (state.respostaVisivel || escolhaUsuario) {
+          if (letra === q.correta) { btn.classList.add("is-correct"); statusIcon = "✓"; }
+          else if (escolhaUsuario === letra && letra !== q.correta) { btn.classList.add("is-wrong"); statusIcon = "✗"; }
+        }
+
+        btn.innerHTML = `<span class="option-letter">${letra}</span><span class="option-text">${q.alternativas[letra]}</span><span class="option-status-icon">${statusIcon}</span>`;
+        btn.addEventListener("click", () => handleOptionSelect(letra));
+        elOptionsContainer.appendChild(btn);
+      });
+
+      elAnswerPill.textContent = `ALTERNATIVA ${q.correta}) ${q.alternativas[q.correta]}`;
+      elAnswerText.innerHTML = q.resolucao; // Usa innerHTML para tags <br> e formatação LaTeX renderizada
+
+      if (state.respostaVisivel) {
+        elAnswerBox.classList.add("visible");
+        elBtnReveal.textContent = "🙈 Ocultar Resposta";
+        elBtnReveal.classList.add("is-open");
+      } else {
+        elAnswerBox.classList.remove("visible");
+        elBtnReveal.textContent = "👁️ Mostrar Resposta";
+        elBtnReveal.classList.remove("is-open");
+      }
+
+      elBtnPrev.disabled = state.indiceNaLista === 0;
+      elBtnNext.disabled = state.indiceNaLista === lista.length - 1;
+      elBtnNext.textContent = state.indiceNaLista === lista.length - 1 ? "Fim do Bloco ✓" : "Avançar ➔";
+
+      populateQuestionSelect();
+      updateScoreDisplay();
+
+      // Força a renderização do MathJax para a nova questão
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([elStatement, elOptionsContainer, elAnswerBox]).catch(err => console.log('MathJax error: ', err));
+      }
+    }
+
+    function handleOptionSelect(letra) {
+      const q = getFilteredQuestions()[state.indiceNaLista];
+      state.respostasUsuario[q.numero] = letra;
+      state.respostaVisivel = true;
+      renderQuestion();
+    }
+
+    function goNext() {
+      const lista = getFilteredQuestions();
+      if (state.indiceNaLista < lista.length - 1) {
+        state.indiceNaLista++;
+        state.respostaVisivel = Boolean(state.respostasUsuario[lista[state.indiceNaLista].numero]);
+        renderQuestion();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        showToast("Você chegou à última questão desta seleção!");
+      }
+    }
+
+    function goPrev() {
+      const lista = getFilteredQuestions();
+      if (state.indiceNaLista > 0) {
+        state.indiceNaLista--;
+        state.respostaVisivel = Boolean(state.respostasUsuario[lista[state.indiceNaLista].numero]);
+        renderQuestion();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    function toggleRevealAnswer() {
+      state.respostaVisivel = !state.respostaVisivel;
+      renderQuestion();
+    }
+
+    function adjustFontScale(delta) {
+      state.fontScale = Math.min(1.55, Math.max(0.75, Number((state.fontScale + delta).toFixed(2))));
+      document.documentElement.style.setProperty("--font-scale", String(state.fontScale));
+      elZoomLabel.textContent = `${Math.round(state.fontScale * 100)}%`;
+    }
+
+    function toggleTheme() {
+      state.darkMode = !state.darkMode;
+      document.documentElement.classList.toggle("dark", state.darkMode);
+      elBtnTheme.textContent = state.darkMode ? "☀️ Claro" : "🌙 Escuro";
+    }
+
+    function toggleFullscreen() {
+      try {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => showToast("Use F11 no teclado."));
+        else document.exitFullscreen().catch(() => {});
+      } catch { showToast("Use F11 no teclado."); }
+    }
+
+    function downloadForGithub() {
+      try {
+        const clone = document.documentElement.cloneNode(true);
+        // Remove scripts injetados pelo MathJax dinamicamente para não salvar o cache no arquivo
+        const mathScripts = clone.querySelectorAll('script[id^="MathJax"]');
+        mathScripts.forEach(s => { if(s.id !== "MathJax-script") s.remove(); });
+        
+        const htmlContent = "<!DOCTYPE html>\n" + clone.outerHTML;
+        const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "index.html";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        showToast("Arquivo index.html baixado! Pronto para o GitHub Pages.");
+      } catch { showToast("Erro no download automático."); }
+    }
+
+    /* ==========================================================================
+       INICIALIZAÇÃO
+       ========================================================================== */
+    document.addEventListener("DOMContentLoaded", () => {
+      elBtnNext.addEventListener("click", goNext);
+      elBtnPrev.addEventListener("click", goPrev);
+      elBtnReveal.addEventListener("click", toggleRevealAnswer);
+      document.getElementById("btn-font-up").addEventListener("click", () => adjustFontScale(0.1));
+      document.getElementById("btn-font-down").addEventListener("click", () => adjustFontScale(-0.1));
+      elBtnTheme.addEventListener("click", toggleTheme);
+      elBtnFullscreen.addEventListener("click", toggleFullscreen);
+      document.getElementById("btn-download-github").addEventListener("click", downloadForGithub);
+
+      elEixoFilter.addEventListener("change", (e) => {
+        state.eixoAtual = e.target.value; state.indiceNaLista = 0;
+        const lista = getFilteredQuestions();
+        state.respostaVisivel = Boolean(state.respostasUsuario[lista[0].numero]);
+        renderQuestion();
+      });
+
+      elQuestionSelect.addEventListener("change", (e) => {
+        state.indiceNaLista = Number(e.target.value);
+        const lista = getFilteredQuestions();
+        state.respostaVisivel = Boolean(state.respostasUsuario[lista[state.indiceNaLista].numero]);
+        renderQuestion();
+      });
+
+      document.getElementById("btn-reset-score").addEventListener("click", () => {
+        state.respostasUsuario = {}; state.respostaVisivel = false;
+        renderQuestion(); showToast("Respostas limpas.");
+      });
+
+      document.addEventListener("keydown", (e) => {
+        const tag = e.target?.tagName.toUpperCase() || "";
+        if (tag === "SELECT" || tag === "INPUT" || tag === "TEXTAREA") return;
+        if (e.key === "ArrowRight") { e.preventDefault(); goNext(); }
+        else if (e.key === "ArrowLeft") { e.preventDefault(); goPrev(); }
+        else if (e.key.toLowerCase() === "r" || e.key === " ") { e.preventDefault(); toggleRevealAnswer(); }
+        else if (["a", "b", "c", "d"].includes(e.key.toLowerCase())) { e.preventDefault(); handleOptionSelect(e.key.toUpperCase()); }
+      });
+
+      const swipeArea = document.getElementById("swipe-area");
+      let touchStartX = 0, touchStartY = 0;
+      swipeArea.addEventListener("touchstart", (e) => {
+        if (e.changedTouches.length) { touchStartX = e.changedTouches[0].screenX; touchStartY = e.changedTouches[0].screenY; }
+      }, { passive: true });
+      swipeArea.addEventListener("touchend", (e) => {
+        if (e.changedTouches.length) {
+          const deltaX = e.changedTouches[0].screenX - touchStartX, deltaY = e.changedTouches[0].screenY - touchStartY;
+          if (Math.abs(deltaX) > 65 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) deltaX < 0 ? goNext() : goPrev();
+        }
+      }, { passive: true });
+
+      // Iniciar a renderização do MathJax na inicialização
+      if (window.MathJax) {
+        MathJax.startup.promise = MathJax.startup.promise
+          .then(() => { renderQuestion(); })
+          .catch((err) => console.log('Typeset failed: ' + err.message));
+      } else {
+        renderQuestion();
+      }
+    });
+  </script>
+</body>
+</html>
